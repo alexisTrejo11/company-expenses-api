@@ -1,10 +1,10 @@
 package io.github.alexisTrejo11.company.expenses.service.Controller;
 
 import io.github.alexisTrejo11.company.expenses.controller.ExpenseAttachmentController;
-import io.github.alexisTrejo11.company.expenses.dto.Attachements.AttachmentDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Expenses.ExpenseDTO;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.AttachmentService;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.ExpenseService;
+import io.github.alexisTrejo11.company.expenses.service.AttachmentService;
+import io.github.alexisTrejo11.company.expenses.service.ExpenseService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.attachements.AttachmentDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseDTO;
 import io.github.alexisTrejo11.company.expenses.shared.file.FileHandler;
 import io.github.alexisTrejo11.company.expenses.shared.MessageGenerator;
 import io.github.alexisTrejo11.company.expenses.shared.Result;

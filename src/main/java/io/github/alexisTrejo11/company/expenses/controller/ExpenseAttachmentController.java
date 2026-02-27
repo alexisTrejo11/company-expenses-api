@@ -1,9 +1,9 @@
 package io.github.alexisTrejo11.company.expenses.controller;
 
-import io.github.alexisTrejo11.company.expenses.dto.Attachements.AttachmentDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Expenses.ExpenseDTO;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.AttachmentService;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.ExpenseService;
+import io.github.alexisTrejo11.company.expenses.service.AttachmentService;
+import io.github.alexisTrejo11.company.expenses.service.ExpenseService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.attachements.AttachmentDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseDTO;
 import io.github.alexisTrejo11.company.expenses.shared.file.FileHandler;
 import io.github.alexisTrejo11.company.expenses.shared.MessageGenerator;
 import io.github.alexisTrejo11.company.expenses.shared.ResponseWrapper;
@@ -26,11 +26,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("/v1/api/employees/expenses")
 @RequiredArgsConstructor
 public class ExpenseAttachmentController {
-
     private final ExpenseService expenseService;
     private final AttachmentService attachmentService;
     private final FileHandler fileHandler;
-    private final MessageGenerator message;
 
     @Operation(summary = "Add an attachment to an expense",
             description = "Uploads a file and associates it with a specific expense.")
@@ -74,6 +72,6 @@ public class ExpenseAttachmentController {
                     .body(ResponseWrapper.notFound("Expense", "expenseId", expenseId));
         }
 
-        return ResponseEntity.ok(ResponseWrapper.found(expenses, "Expenses", "expenseId", expenseId));
+        return ResponseEntity.ok(ResponseWrapper.found(expenses, "expenses", "expenseId", expenseId));
     }
 }

@@ -1,6 +1,6 @@
 package io.github.alexisTrejo11.company.expenses.config.security;
 
-import io.github.alexisTrejo11.company.expenses.auth.JWTService;
+import io.github.alexisTrejo11.company.expenses.service.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,16 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/api/auth/**").permitAll()
+                        // Public endpoints
+                        .requestMatchers(
+                                "/v1/api/auth/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api-docs/**"
+                        ).permitAll()
+
+                        // Secured endpoints
                         .requestMatchers("/v1/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/v1/api/employees/**").authenticated()
                         .requestMatchers("/v1/api/manager/**").hasAnyRole("MANAGER", "ADMIN")

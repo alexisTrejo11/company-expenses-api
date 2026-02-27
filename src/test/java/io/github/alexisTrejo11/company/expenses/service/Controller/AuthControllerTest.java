@@ -1,14 +1,14 @@
 package io.github.alexisTrejo11.company.expenses.service.Controller;
 
 import io.github.alexisTrejo11.company.expenses.controller.AuthController;
-import io.github.alexisTrejo11.company.expenses.dto.Auth.LoginDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Auth.UserInsertDTO;
-import io.github.alexisTrejo11.company.expenses.dto.User.UserDTO;
+import io.github.alexisTrejo11.company.expenses.service.AuthService;
+import io.github.alexisTrejo11.company.expenses.service.UserService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.auth.LoginDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.auth.UserInsertDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.user.UserDTO;
 import io.github.alexisTrejo11.company.expenses.shared.ResponseWrapper;
 import io.github.alexisTrejo11.company.expenses.shared.Result;
 import io.github.alexisTrejo11.company.expenses.shared.enums.Role;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.AuthService;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

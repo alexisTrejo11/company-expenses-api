@@ -1,11 +1,11 @@
 package io.github.alexisTrejo11.company.expenses.service.Controller;
 
-import io.github.alexisTrejo11.company.expenses.auth.JWTService;
+import io.github.alexisTrejo11.company.expenses.service.JWTService;
+import io.github.alexisTrejo11.company.expenses.service.NotificationService;
+import io.github.alexisTrejo11.company.expenses.service.ReimbursementService;
 import io.github.alexisTrejo11.company.expenses.controller.ReimbursementController;
-import io.github.alexisTrejo11.company.expenses.dto.Reimbursement.ReimbursementDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Reimbursement.ReimbursementInsertDTO;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.NotificationService;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.ReimbursementService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.reimbursement.ReimbursementDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.reimbursement.ReimbursementInsertDTO;
 import io.github.alexisTrejo11.company.expenses.shared.ResponseWrapper;
 import io.github.alexisTrejo11.company.expenses.shared.Result;
 import org.junit.jupiter.api.BeforeEach;

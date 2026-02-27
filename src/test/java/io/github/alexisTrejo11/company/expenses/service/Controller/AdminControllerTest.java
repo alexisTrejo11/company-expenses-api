@@ -1,9 +1,9 @@
 package io.github.alexisTrejo11.company.expenses.service.Controller;
 
 import io.github.alexisTrejo11.company.expenses.controller.AdminController;
-import io.github.alexisTrejo11.company.expenses.dto.Dashboard.AdminDashboardDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Settings.SettingsDTO;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.AdminService;
+import io.github.alexisTrejo11.company.expenses.service.AdminService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.dashboard.AdminDashboardDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.settings.SettingsDTO;
 import io.github.alexisTrejo11.company.expenses.shared.ResponseWrapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,7 +61,7 @@ class AdminControllerTest {
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals("Settings updated successfully", response.getBody().getMessage());
+        assertEquals("settings updated successfully", response.getBody().getMessage());
         verify(adminService).updateSettings(testSettingsDTO);
     }
 
@@ -75,7 +75,7 @@ class AdminControllerTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals("Current Settings Successfully Fetched", response.getMessage());
+        assertEquals("Current settings Successfully Fetched", response.getMessage());
         assertEquals(testSettingsDTO, response.getData());
         verify(adminService).getCurrentSettings();
     }

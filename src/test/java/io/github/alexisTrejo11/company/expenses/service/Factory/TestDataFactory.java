@@ -1,8 +1,8 @@
 package io.github.alexisTrejo11.company.expenses.service.Factory;
 
-import io.github.alexisTrejo11.company.expenses.dto.Auth.UserInsertDTO;
-import io.github.alexisTrejo11.company.expenses.dto.User.ProfileDTO;
-import io.github.alexisTrejo11.company.expenses.dto.User.UserDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.user.ProfileDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.user.UserDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.auth.UserInsertDTO;
 import io.github.alexisTrejo11.company.expenses.model.User;
 import io.github.alexisTrejo11.company.expenses.shared.enums.Role;
 

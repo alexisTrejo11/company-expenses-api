@@ -2,7 +2,7 @@ package io.github.alexisTrejo11.company.expenses.repository;
 
 import io.github.alexisTrejo11.company.expenses.model.Expense;
 import io.github.alexisTrejo11.company.expenses.shared.enums.ExpenseStatus;
-import io.github.alexisTrejo11.company.expenses.shared.ExpenseSummaryDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseSummaryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,11 +26,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Query("SELECT e FROM Expense e WHERE e.status = :status AND e.deletedAt IS NULL ORDER BY e.createdAt")
     Page<Expense> findByStatus(@Param("status") ExpenseStatus status, Pageable pageable);
 
-    @Query("SELECT new alexisTrejo.expenses.tracking.api.Utils.Summary.ExpenseSummaryDTO(SUM(e.amount), COUNT(e)) " +
-            "FROM Expense e " +
-            "WHERE e.status = :status " +
-            "AND e.createdAt BETWEEN :startDate AND :endDate " +
-            "AND e.deletedAt IS NULL")
+    @Query("SELECT new io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseSummaryDTO(SUM(e.amount), COUNT(e)) " +
+        "FROM Expense e " +
+        "WHERE e.status = :status " +
+        "AND e.createdAt BETWEEN :startDate AND :endDate " +
+        "AND e.deletedAt IS NULL")
     CompletableFuture<ExpenseSummaryDTO> getExpenseSummaryByStatusAndDateRange(
             @Param("status") ExpenseStatus status,
             @Param("startDate") LocalDateTime startDate,

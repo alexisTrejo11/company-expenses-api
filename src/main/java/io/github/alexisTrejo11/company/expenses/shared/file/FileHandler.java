@@ -1,6 +1,6 @@
 package io.github.alexisTrejo11.company.expenses.shared.file;
 
-import io.github.alexisTrejo11.company.expenses.dto.Expenses.ExpenseDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseDTO;
 import io.github.alexisTrejo11.company.expenses.shared.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

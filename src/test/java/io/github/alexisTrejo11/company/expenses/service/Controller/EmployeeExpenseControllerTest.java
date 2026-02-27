@@ -1,11 +1,11 @@
 package io.github.alexisTrejo11.company.expenses.service.Controller;
 
-import io.github.alexisTrejo11.company.expenses.auth.JWTService;
+import io.github.alexisTrejo11.company.expenses.service.ExpenseService;
+import io.github.alexisTrejo11.company.expenses.service.JWTService;
+import io.github.alexisTrejo11.company.expenses.service.NotificationService;
 import io.github.alexisTrejo11.company.expenses.controller.EmployeeExpenseController;
-import io.github.alexisTrejo11.company.expenses.dto.Expenses.ExpenseDTO;
-import io.github.alexisTrejo11.company.expenses.dto.Expenses.ExpenseInsertDTO;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.ExpenseService;
-import io.github.alexisTrejo11.company.expenses.service.Interfaces.NotificationService;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseDTO;
+import io.github.alexisTrejo11.company.expenses.shared.dto.expenses.ExpenseInsertDTO;
 import io.github.alexisTrejo11.company.expenses.shared.ResponseWrapper;
 import io.github.alexisTrejo11.company.expenses.shared.Result;
 import io.github.alexisTrejo11.company.expenses.shared.enums.ExpenseStatus;
