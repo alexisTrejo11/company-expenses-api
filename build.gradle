@@ -51,14 +51,14 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// Auth
+	// auth
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-oauth2-jose'
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
 	implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-	// Mail Service
+	// Mail service
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	// AutoMappers

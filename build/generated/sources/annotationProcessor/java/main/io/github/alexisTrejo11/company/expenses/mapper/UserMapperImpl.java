@@ -1,0 +1,86 @@
+package io.github.alexisTrejo11.company.expenses.mapper;
+
+import io.github.alexisTrejo11.company.expenses.dto.Auth.UserInsertDTO;
+import io.github.alexisTrejo11.company.expenses.dto.User.ProfileDTO;
+import io.github.alexisTrejo11.company.expenses.dto.User.UserDTO;
+import io.github.alexisTrejo11.company.expenses.model.User;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2025-01-21T18:43:16-0600",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.12.jar, environment: Java 17.0.12 (JetBrains s.r.o.)"
+)
+@Component
+public class UserMapperImpl implements UserMapper {
+
+    @Override
+    public User insertDtoToEntity(UserInsertDTO userInsertDTO) {
+        if ( userInsertDTO == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setEmail( userInsertDTO.getEmail() );
+        user.setPassword( userInsertDTO.getPassword() );
+        user.setFirstName( userInsertDTO.getFirstName() );
+        user.setLastName( userInsertDTO.getLastName() );
+        user.setDepartment( userInsertDTO.getDepartment() );
+
+        user.setCreatedAt( java.time.LocalDateTime.now() );
+        user.setUpdatedAt( java.time.LocalDateTime.now() );
+        user.setLastLogin( java.time.LocalDateTime.now() );
+
+        return user;
+    }
+
+    @Override
+    public UserDTO entityToDTO(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setEmail( user.getEmail() );
+        userDTO.setFirstName( user.getFirstName() );
+        userDTO.setLastName( user.getLastName() );
+        userDTO.setDepartment( user.getDepartment() );
+        userDTO.setId( user.getId() );
+        userDTO.setPassword( user.getPassword() );
+        userDTO.setRole( user.getRole() );
+
+        return userDTO;
+    }
+
+    @Override
+    public ProfileDTO entityToProfileDTO(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        ProfileDTO profileDTO = new ProfileDTO();
+
+        profileDTO.setEmail( user.getEmail() );
+        profileDTO.setFirstName( user.getFirstName() );
+        profileDTO.setLastName( user.getLastName() );
+        profileDTO.setDepartment( user.getDepartment() );
+
+        return profileDTO;
+    }
+
+    @Override
+    public void updateUser(User user, UserInsertDTO userInsertDTO) {
+        if ( userInsertDTO == null ) {
+            return;
+        }
+
+        user.setEmail( userInsertDTO.getEmail() );
+        user.setPassword( userInsertDTO.getPassword() );
+        user.setFirstName( userInsertDTO.getFirstName() );
+        user.setLastName( userInsertDTO.getLastName() );
+        user.setDepartment( userInsertDTO.getDepartment() );
+    }
+}
