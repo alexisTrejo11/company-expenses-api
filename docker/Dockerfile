@@ -3,13 +3,11 @@ WORKDIR /app
 COPY . .
 RUN gradle build -x test
 
-FROM openjdk:17-slim
+FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
-COPY ./publicKey.pem /app/config/publicKey.pem
-COPY ./privateKey.pem /app/config/privateKey.pem
 
 EXPOSE 8080
 
