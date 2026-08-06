@@ -18,17 +18,28 @@
 *.zip
 *.tar.gz
 *.rar
-.env
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Env / secrets
+.env
+privateKey.pem
+publicKey.pem
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.html
 hs_err_pid*
 replay_pid*
 
-.idea
-.vscode
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
 *.iml
 *.ipr
+*.iws
 
-# My Files
-privateKey.pem
-publicKey.pem
+# Gradle / build outputs
+.gradle/
+build/
+bin/
+out/
