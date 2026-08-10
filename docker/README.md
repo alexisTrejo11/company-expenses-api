@@ -19,7 +19,7 @@ Compose files live in `docker/` and reference `../.env` (repo root). Run all com
 For **local** compose, `${DB_*}` in the Postgres service also needs the root `.env` for variable substitution:
 
 ```bash
-docker compose --env-file .env -f docker/docker-compose.local.yml <command>
+docker compose --env-file .env -f docker/docker-compose.yml <command>
 ```
 
 Production and other commands only need:
@@ -32,8 +32,8 @@ docker compose -f docker/docker-compose.<profile>.yml <command>
 
 | File | Purpose |
 |---|---|
-| `Dockerfile` | Multi-stage build: Gradle compile + Eclipse Temurin 17 JRE |
-| `docker-compose.local.yml` | Local development — app + PostgreSQL |
+| `../Dockerfile` | Multi-stage build: Gradle compile + Eclipse Temurin 17 JRE |
+| `../docker-compose.yml` | Local development — app + PostgreSQL |
 | `docker-compose.prod.yml` | Production / cloud deploy — app only, external database |
 
 ## Local (app + PostgreSQL)
@@ -44,25 +44,25 @@ Runs the API and PostgreSQL 15. The app overrides `DB_HOST=db` and `DB_PORT=5432
 - PostgreSQL (host access): `localhost:5431`
 
 ```bash
-docker compose --env-file .env -f docker/docker-compose.local.yml up --build
+docker compose --env-file .env -f docker/docker-compose.yml up --build
 ```
 
 Detached:
 
 ```bash
-docker compose --env-file .env -f docker/docker-compose.local.yml up --build -d
+docker compose --env-file .env -f docker/docker-compose.yml up --build -d
 ```
 
 Stop:
 
 ```bash
-docker compose --env-file .env -f docker/docker-compose.local.yml down
+docker compose --env-file .env -f docker/docker-compose.yml down
 ```
 
 Remove containers and the Postgres volume:
 
 ```bash
-docker compose --env-file .env -f docker/docker-compose.local.yml down -v
+docker compose --env-file .env -f docker/docker-compose.yml down -v
 ```
 
 ### Local `.env` variables
@@ -99,4 +99,4 @@ Stop:
 docker compose -f docker/docker-compose.prod.yml down
 ```
 
-On Railway, Render, Fly.io, etc., set `dockerfile` to `docker/Dockerfile`, build context to the repo root, and inject the same `DB_*` and app variables via the platform UI.
+On Railway, Render, Fly.io, etc., set `dockerfile` to `../Dockerfile`, build context to the repo root, and inject the same `DB_*` and app variables via the platform UI.
