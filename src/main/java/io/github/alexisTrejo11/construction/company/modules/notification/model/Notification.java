@@ -1,6 +1,6 @@
 package io.github.alexisTrejo11.construction.company.modules.notification.model;
 
-import io.github.alexisTrejo11.construction.company.modules.user.model.User;
+import io.github.alexisTrejo11.construction.company.modules.user.shared.UserEntity;
 import io.github.alexisTrejo11.construction.company.shared.enums.NotificationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,31 +17,29 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Notification {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private UserEntity user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private NotificationType type;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private NotificationType type;
 
-    @Column(nullable = false)
-    private String message;
+  @Column(nullable = false)
+  private String message;
 
-    @Column(nullable = false)
-    private Boolean read = false;
+  @Column(nullable = false)
+  private Boolean read = false;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+  @Column(nullable = false)
+  private LocalDateTime createdAt;
 
-    public void setAsRead() {
-        this.read = true;
-    }
-
+  public void setAsRead() {
+    this.read = true;
+  }
 
 }
-

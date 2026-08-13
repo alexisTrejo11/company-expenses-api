@@ -1,7 +1,7 @@
 package io.github.alexisTrejo11.construction.company.modules.notification.service;
 
 import io.github.alexisTrejo11.construction.company.modules.notification.model.Notification;
-import io.github.alexisTrejo11.construction.company.modules.user.model.User;
+import io.github.alexisTrejo11.construction.company.modules.user.shared.UserEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,38 +17,38 @@ import org.thymeleaf.context.Context;
 @RequiredArgsConstructor
 public class EmailService {
 
-    private final JavaMailSender mailSender;
-    private final TemplateEngine templateEngine;
+  private final JavaMailSender mailSender;
+  private final TemplateEngine templateEngine;
 
-    @Async("taskExecutor")
-    public void sendEmailFromNotification(Notification notification) {
-        User user = notification.getUser();
-        if (user == null || user.getEmail() == null || user.getEmail().isEmpty()) {
-            log.error("notification does not have a valid user or email.");
-            return;
-        }
-
-        sendEmail(notification);
+  @Async("taskExecutor")
+  public void sendEmailFromNotification(Notification notification) {
+    UserEntity user = notification.getUser();
+    if (user == null || user.getEmail() == null || user.getEmail().isEmpty()) {
+      log.error("notification does not have a valid user or email.");
+      return;
     }
 
-    private void sendEmail(Notification notification) {
-        Context context = new Context();
-        User user = notification.getUser();
+    sendEmail(notification);
+  }
 
-        context.setVariable("name", user.getFirstName() + " " + user.getLastName());
-        context.setVariable("subject", "Expense notification");
-        context.setVariable("message", notification.getMessage());
+  private void sendEmail(Notification notification) {
+    Context context = new Context();
+    UserEntity user = notification.getUser();
 
-        String htmlContent = templateEngine.process("notification", context);
+    context.setVariable("name", user.getFullName());
+    context.setVariable("subject", "Expense notification");
+    context.setVariable("message", notification.getMessage());
 
-        // Prepare and send email
-        MimeMessagePreparator preparator = mimeMessage -> {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setTo(user.getEmail());
-            helper.setSubject("Expense notification");
-            helper.setText(htmlContent, true);
-        };
+    String htmlContent = templateEngine.process("notification", context);
 
-        mailSender.send(preparator);
-    }
+    // Prepare and send email
+    MimeMessagePreparator preparator = mimeMessage -> {
+      MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+      helper.setTo(user.getEmail());
+      helper.setSubject("Expense notification");
+      helper.setText(htmlContent, true);
+    };
+
+    mailSender.send(preparator);
+  }
 }

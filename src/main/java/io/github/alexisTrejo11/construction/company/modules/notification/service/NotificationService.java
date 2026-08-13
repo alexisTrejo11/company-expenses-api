@@ -1,9 +1,9 @@
 package io.github.alexisTrejo11.construction.company.modules.notification.service;
 
 import io.github.alexisTrejo11.construction.company.modules.notification.model.Notification;
-import io.github.alexisTrejo11.construction.company.modules.user.model.User;
+import io.github.alexisTrejo11.construction.company.modules.user.shared.UserEntity;
 import io.github.alexisTrejo11.construction.company.modules.notification.repository.NotificationRepository;
-import io.github.alexisTrejo11.construction.company.modules.user.repository.UserRepository;
+import io.github.alexisTrejo11.construction.company.modules.user.shared.UserRepository;
 import io.github.alexisTrejo11.construction.company.shared.MessageGenerator;
 import io.github.alexisTrejo11.construction.company.shared.dto.expenses.ExpenseDTO;
 import io.github.alexisTrejo11.construction.company.shared.dto.notification.NotificationDTO;
@@ -48,10 +48,9 @@ public class NotificationService {
         .orElse(null);
   }
 
-
   @Transactional
   public void createNotification(NotificationInsertDTO notificationInsertDTO) {
-    User user = userRepository.findById(notificationInsertDTO.getUserId())
+    UserEntity user = userRepository.findById(notificationInsertDTO.getUserId())
         .orElseThrow(() -> new EntityNotFoundException("user Not Found"));
 
     Notification notification = notificationMapper.insertDtoToEntity(notificationInsertDTO);
@@ -64,7 +63,8 @@ public class NotificationService {
   @Async("taskExecutor")
   public void sendNotificationFromExpense(ExpenseDTO expenseDTO) {
     Notification notification = createNotificationFromExpense(expenseDTO);
-    log.info("notification Successfully created with Id {} for user Id {}", notification.getId(), notification.getUser().getId());
+    log.info("notification Successfully created with Id {} for user Id {}", notification.getId(),
+        notification.getUser().getId());
 
     emailService.sendEmailFromNotification(notification);
     log.info("Email Successfully Send It To The Email From user Id {}", notification.getUser().getId());
@@ -78,15 +78,13 @@ public class NotificationService {
     notificationRepository.save(notification);
   }
 
-
   @Transactional
   private Notification createNotificationFromExpense(ExpenseDTO expenseDTO) {
     NotificationType notificationType = mapExpenseStatusToNotificationType(expenseDTO.getStatus());
     String notificationMessage = generateNotificationMessage(expenseDTO);
 
-    User user = userRepository.findById(expenseDTO.getUserId())
+    UserEntity user = userRepository.findById(expenseDTO.getUserId())
         .orElseThrow(() -> new EntityNotFoundException("user not found"));
-
 
     Notification notification = Notification.builder()
         .createdAt(LocalDateTime.now())
@@ -118,7 +116,8 @@ public class NotificationService {
 
     switch (status) {
       case PENDING ->
-          notificationMessage.append(" Was Successfully Processed and Will Be Checked For Validation As Soon As Possible.");
+        notificationMessage
+            .append(" Was Successfully Processed and Will Be Checked For Validation As Soon As Possible.");
       case APPROVED -> notificationMessage.append(" Was Approved.");
       case REIMBURSED -> notificationMessage.append(" Was Reimbursed.");
       case REJECTED -> notificationMessage.append(" Was Rejected. Check The Expense For More Details.");
